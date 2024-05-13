@@ -1,5 +1,6 @@
 package com.example.Student.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Student.domain.Polaganje;
 import com.example.Student.service.PolaganjeService;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/polaganje")
@@ -35,5 +38,11 @@ public class PolaganjeController {
 	@GetMapping("/prosek/student/{id}")
 	public double vratiProsek(@PathVariable Long id) {
 		return polaganjeService.vratiProsek(id);
+	}
+	
+	
+	@GetMapping("/export")
+	public void izvozSvihOcena(HttpServletResponse response) throws IOException{
+		polaganjeService.izvozSvihOcena(response);
 	}
 }
